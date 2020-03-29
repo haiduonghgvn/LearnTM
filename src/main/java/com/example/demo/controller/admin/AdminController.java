@@ -68,4 +68,10 @@ public class AdminController {
         model.addAttribute("productDetail", productService.findById(id));
         return "ProductDetais";
     }
+
+    @GetMapping("/admin/delete")
+    public String deleteProduct(@RequestParam("id") int userId, Model model) {
+        productService.delete(userId);
+        return "redirect:/admin";
+    }
 }

@@ -62,4 +62,14 @@ public class ClientController {
 
         return "ShowAllProduct";
     }
+
+
+
+//    Checkout
+
+    @GetMapping(value = "/checkout")
+    private String checkOut(Model model){
+
+        return "indexStore";
+    }
 }

@@ -119,11 +119,10 @@
                                                 <a class="btn-success btn center"><span class="i-Eye-Scan"
                                                                                         style="font-size: 22px"/>&nbsp;</a>
 
-                                                <a type="button" class="btn btn-danger btn-block mb-3"
-                                                   th:href="@{/delete(id=${p.id})}"
+                                                <a type="button" class="btn btn-danger"
+                                                   th:href="@{/admin/delete(id=${p.id})}"
                                                    th:onclick="return confirm('Are you sure?')"><span
-                                                        class="i-Close"
-                                                        style="font-size: 22px"/></a>s
+                                                        class="i-Close" style="font-size: 22px;"/></a>
 
                                             </td>
                                         </tr>
