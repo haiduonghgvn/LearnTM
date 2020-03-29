@@ -31,7 +31,7 @@ public class ClientController {
     @Autowired
     UserRepo userRepo;
 
-    private PagingService pagingService;
+
 
     @GetMapping
     public String index() {
@@ -53,33 +53,13 @@ public class ClientController {
         return modelAndView;
     }
 
-    //    @GetMapping(value = "/user/showAll")
-//    public ModelAndView showAllDetail(){
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.setViewName("ShowAllProduct");
-//        List<ProductDto> p = productService.listAll();
-//        modelAndView.addObject("listAllProduct", p);
-//        return modelAndView;
-//    }
-    @GetMapping("/user/showAll")
-    public ModelAndView showPersonsPage(@RequestParam("pageSize") Optional<Integer> pageSize,
-                                        @RequestParam("page") Optional<Integer> page) {
-        ModelAndView modelAndView = new ModelAndView("ShowAllProduct");
-        // Evaluate page size. If requested parameter is null, return initial
-        // page size
-        int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
-        // Evaluate page. If requested parameter is null or less than 0 (to
-        // prevent exception), return initial size. Otherwise, return value of
-        // param. decreased by 1.
-        int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
+    @GetMapping( value = "/user/showAll")
+    public String list(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, @ModelAttribute("name") String name,
+                       @ModelAttribute("name") String email) {
 
-        Page<Product> persons = pagingService.findAllPageable(PageRequest.of(evalPage, evalPageSize));
-        Pager pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
+        model.addAttribute("listAllProduct", productService.search(name, page, size));
+        model.addAttribute("name", name);
 
-        modelAndView.addObject("persons", persons);
-        modelAndView.addObject("selectedPageSize", evalPageSize);
-        modelAndView.addObject("pageSizes", PAGE_SIZES);
-        modelAndView.addObject("pager", pager);
-        return modelAndView;
+        return "ShowAllProduct";
     }
 }

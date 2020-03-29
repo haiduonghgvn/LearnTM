@@ -9,7 +9,9 @@ import com.example.demo.service.services.ServiceResult;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -18,8 +20,6 @@ import java.util.Optional;
 
 @Component
 public class ProductServiceImpl implements CRUDService<ProductDto> {
-
-
 
     @Autowired
     ProductRepo productRepo;
@@ -30,7 +30,6 @@ public class ProductServiceImpl implements CRUDService<ProductDto> {
 
         return productEntity;
     }
-
 
     public Page<Product> FindAll(Pageable pageable){
         return productRepo.findAll(pageable);
@@ -60,6 +59,7 @@ public class ProductServiceImpl implements CRUDService<ProductDto> {
         }
         return productDtos;
     }
+
  @Override
     public ServiceResult delete(int id) {
         ServiceResult result = new ServiceResult();
@@ -90,4 +90,14 @@ public class ProductServiceImpl implements CRUDService<ProductDto> {
         return null;
     }
 
+    public Page<Product> getListUser(int page) {
+        Page<Product> products = productRepo.findAll(PageRequest.of(page-1,6 ));
+        return products;
+    }
+
+
+    public Page<Product> search(String name, int page , int size) {
+        Page<Product> products = productRepo.findAllByNameContaining(name, PageRequest.of(page,size, Sort.by("name").ascending()));
+        return products;
+    }
 }

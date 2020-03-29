@@ -2,6 +2,7 @@ package com.example.demo.repository;
 
 import com.example.demo.entity.Product;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -10,16 +11,17 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ProductRepo extends JpaRepository<Product,Integer> {
+public interface ProductRepo extends JpaRepository<Product,Integer>  {
 //    Product findByNameContaininga(String nameProduct);
     Product findAllByCategory_Id(int categoryID);
-
-    @Query(value = "select u from User u where u.userName like %?1%")
-    Page<Product> findByName(String name,Pageable pageable);
+//
+//    @Query(value = "select u from User u where u.userName like %?1%")
+//    Page<Product> findByName(String name,Pageable pageable);
 
     Product findById(int id);
-    public  Page<Product> findAllByName(String Name);
+
     public Page<Product> findAllByNameContaining(String name,Pageable pageable);
+
     public void deleteById(int id);
 
 //    @Query(value = "select u from User u")
