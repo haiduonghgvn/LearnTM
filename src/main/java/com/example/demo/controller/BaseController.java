@@ -33,7 +33,7 @@ public class BaseController {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    @RequestMapping(value = {"/", "/login"})
+    @RequestMapping(value = {"/login"})
     public String login() {
         return "login";
     }

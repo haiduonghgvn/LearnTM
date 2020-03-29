@@ -42,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
         // Cấu hình cho Login Form.
         http.authorizeRequests().and().formLogin()//
-                .loginProcessingUrl("/login")//
+
                 .loginPage("/login")//
                 .defaultSuccessUrl("/user")//
                 .failureUrl("/login?message=error")//
