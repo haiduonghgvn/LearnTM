@@ -16,10 +16,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.util.*;
 
 @Component
 public class UserServiceImpl implements CRUDService<UserDto> {
@@ -94,8 +92,28 @@ public class UserServiceImpl implements CRUDService<UserDto> {
         } catch (Exception e) {
             throw new InternalServerException(e.toString());
         }
-
         return UserMapper.toUserDto(user.get());
     }
+    public ServiceResult create(User customer) {
+        ServiceResult result = new ServiceResult();
+        customer.setCreateDate(new Date());
+        result.setData(userRepo.save(customer));
+        return result;
+    }
 
+    public UserDto findUserByName(String username) {
+        User customer = userRepo.findByUserName(username);
+
+        UserDto customerDto = new UserDto();
+        customerDto.setUserName(customer.getUserName());
+        customerDto.setId(customer.getId());
+        customerDto.setPassword(customer.getPassword());
+        return customerDto;
+    }
+
+    public ServiceResult registerNormalUser(User user) {
+
+        user.setRole("USER");
+        return create(user);
+    }
 }
