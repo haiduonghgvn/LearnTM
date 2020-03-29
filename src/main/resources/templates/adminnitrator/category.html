@@ -50,7 +50,7 @@
                 <!-- Submenu Dashboards -->
                 <ul class="childNav" data-parent="products">
                     <li class="nav-item">
-                        <a th:href="@{/news}">
+                        <a th:href="@{/news}" >
                             <i class="nav-icon i-Clock-3"></i>
                             <span class="item-name">Add New Product</span>
                         </a>
@@ -89,7 +89,7 @@
             <!-- end of row -->
 
             <div class="row mb-4">
-                <div class="col-md-12 mb-4">
+                <div class="col-md-12 mb-4" >
                     <div class="card text-left">
 
                         <div class="card-body">
@@ -98,7 +98,7 @@
                                 <table id="zero_configuration_table" class="display table table-striped table-bordered"
                                        style="width:100%">
                                     <thead>
-                                    <tr class="bold center" style="font-size: 17px">
+                                    <tr class="bold center" style="font-size: 17px" >
                                         <th>Name</th>
                                         <th>Desciption</th>
                                         <th>Price</th>
@@ -110,7 +110,7 @@
                                     <th:block th:each="p : ${products}">
                                         <tr>
                                             <td th:text="${p.name}">
-                                                <a th:href="@{/admin/editProduct(id=${p.id})}"></a>
+                                                <a th:href="@{}"></a>
                                             </td>
                                             <td th:text="${p.description}"></td>
                                             <td th:text="${p.price}"></td>
@@ -118,19 +118,15 @@
                                             <td style="width: 150px">
                                                 <a class="btn-success btn center"><span class="i-Eye-Scan"
                                                                                         style="font-size: 22px"/>&nbsp;</a>
-
-                                                <a type="button" class="btn btn-danger btn-block mb-3"
-                                                   th:href="@{/delete(id=${p.id})}"
-                                                   th:onclick="return confirm('Are you sure?')"><span
-                                                        class="i-Close"
-                                                        style="font-size: 22px"/></a>s
+                                                <a class="btn-danger btn center"  th:href="@{/delete(id=${p.id})}"><span class="i-Close"
+                                                                                                                         style="font-size: 22px"/>&nbsp;</a>
 
                                             </td>
                                         </tr>
                                     </th:block>
                                     </tbody>
                                     <tfoot>
-                                    <tr class="bold center" style="font-size: 17px">
+                                    <tr class="bold center" style="font-size: 17px" >
                                         <th>Name</th>
                                         <th>Desciption</th>
                                         <th>Price</th>

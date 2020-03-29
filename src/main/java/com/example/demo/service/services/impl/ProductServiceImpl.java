@@ -8,6 +8,8 @@ import com.example.demo.service.services.CRUDService;
 import com.example.demo.service.services.ServiceResult;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -16,6 +18,8 @@ import java.util.Optional;
 
 @Component
 public class ProductServiceImpl implements CRUDService<ProductDto> {
+
+
 
     @Autowired
     ProductRepo productRepo;
@@ -26,6 +30,12 @@ public class ProductServiceImpl implements CRUDService<ProductDto> {
 
         return productEntity;
     }
+
+
+    public Page<Product> FindAll(Pageable pageable){
+        return productRepo.findAll(pageable);
+    }
+
     @Override
     public List<ProductDto> listAll() {
         List<ProductDto> productDtos = new ArrayList<>();

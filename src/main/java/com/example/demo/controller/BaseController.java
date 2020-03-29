@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.Product;
 import com.example.demo.model.dto.CategoryDto;
 import com.example.demo.model.dto.ProductDto;
 import com.example.demo.model.dto.UserDto;
@@ -29,22 +30,6 @@ public class BaseController {
     @RequestMapping(value = {"/", "/login"})
     public String login() {
         return "login";
-    }
-
-    @GetMapping(value = "/user")
-    public ModelAndView home() {
-        List<ProductDto> productDtos= productService.getTopProduct();
-        System.out.println(productDtos.toString());
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("fiveProduct", productDtos);
-        System.out.println(productDtos);
-        modelAndView.setViewName("indexStore");
-        return modelAndView;
-    }
-
-    @RequestMapping("/admin")
-    public String admin() {
-        return "adminnitrator/adminIndex";
     }
 
     @RequestMapping("/403")

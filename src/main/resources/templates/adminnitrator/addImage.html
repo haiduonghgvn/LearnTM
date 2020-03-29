@@ -8,10 +8,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Gull - Laravel + Bootstrap 4 admin template</title>
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{../styles/css/themes/lite-purple.min.css}">
-    <link rel="stylesheet" th:href="@{../styles/vendor/perfect-scrollbar.css}">
-    <link rel="stylesheet" th:href="@{../styles/vendor/datatables.min.css}">
-    <link rel="stylesheet" th:href="@{../styles/vendor/sweetalert2.min.css}">
+    <link rel="stylesheet" th:href="@{/styles/css/themes/lite-purple.min.css}">
+    <link rel="stylesheet" th:href="@{/styles/vendor/perfect-scrollbar.css}">
+    <link rel="stylesheet" th:href="@{/styles/vendor/datatables.min.css}">
+    <link rel="stylesheet" th:href="@{/styles/vendor/sweetalert2.min.css}">
 </head>
 
 <body class="text-left">
@@ -171,13 +171,14 @@
                 </div>
             </div>
 
+
         </div>
 
         <div class="side-content-wrap">
             <div class="sidebar-left open rtl-ps-none" data-perfect-scrollbar data-suppress-scroll-x="true">
                 <ul class="navigation-left">
                     <li class="nav-item" data-item="products">
-                        <a class="nav-item-hold" th:href="@{/customer}">
+                        <a class="nav-item-hold" th:href="@{/admin/listUser}">
                             <i class="nav-icon i-Find-User"></i>
                             <span class="nav-text underline bold">Customer</span>
                         </a>
@@ -191,7 +192,13 @@
                         </a>
                         <div class="triangle"></div>
                     </li>
-
+                    <li class="nav-item">
+                        <a class="nav-item-hold" th:href="@{/admin/category}">
+                            <i class="nav-icon i-File"></i>
+                            <span class="nav-text underline bold">Category</span>
+                        </a>
+                        <div class="triangle"></div>
+                    </li>
                     <li class="nav-item" data-item="dashboard">
                         <a class="nav-item-hold" href="#">
                             <i class="nav-icon i-Bar-Chart"></i>
@@ -247,79 +254,80 @@
             <!-- end of row -->
 
             <div class="row mb-4">
-                <div class="col-md-12 mb-4">
-                    <div class="card text-left">
-                        <div class="card-body">
+            <div class="col-md-12 mb-4">
+                <div class="card text-left">
+                    <div class="card-body">
 
-                            <form method="post" th:action="@{/uploadFile}" enctype="multipart/form-data"
-                                  th:object="${myFile}">
-                                <div class="col-md-6">
-                                    <div class="card mb-5">
-                                        <div class="card-body">
-                                            <div class="d-flex flex-column">
-                                                File: <input type="file" th:field="*{multipartFile}"/> <br/> <br/>
-                                                Description: <input type="text" th:field="*{description}"/> <br/> <br/>
-                                                <input type="text" th:text="${id_product}" name="idProduct"/>
-                                                <br>
-                                                <button type="submit" class="btn btn-outline-primary">Save</button>
+                        <form method="post" th:action="@{/uploadFile}" enctype="multipart/form-data"
+                              th:object="${myFile}">
+                            <div class="col-md-6">
+                                <div class="card mb-5">
+                                    <div class="card-body">
+                                        <div class="d-flex flex-column">
+                                            File: <input type="file" th:field="*{multipartFile}"/> <br/> <br/>
+                                            Description: <input type="text" th:field="*{description}"/> <br/> <br/>
+                                            <input type="text" th:text="${id_product}" name="idProduct"/>
+                                            <br>
+                                            <button type="submit" class="btn btn-outline-primary">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card mb-5">
+                                    <div class="card-body">
+                                        <div class="d-flex flex-column">
+                                            <div class="table-responsive">
+
+                                                <table id="zero_configuration_table"
+                                                       class="display table table-striped table-bordered"
+                                                       style="width:100%">
+                                                    <thead>
+                                                    <tr class="bold center" style="font-size: 17px">
+                                                        <th>Name</th>
+                                                        <th>Desciption</th>
+                                                        <th>Price</th>
+                                                        <th>InStock</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <th:block th:each="p : ${product}">
+                                                        <tr>
+                                                            <td th:text="${p.name}">
+                                                                <a th:href="@{}"></a>
+                                                            </td>
+                                                            <td th:text="${p.description}"></td>
+                                                            <td th:text="${p.price}"></td>
+                                                            <td th:text="${p.inStock}"></td>
+                                                            <!--                                                            <td style="width: 150px" >-->
+                                                            <!--                                                                <input type="checkbox" class="checkbox checkbox-outline-info" th:value="${p.id}">-->
+                                                            <!--                                                            </td>-->
+                                                        </tr>
+                                                    </th:block>
+                                                    </tbody>
+                                                    <tfoot>
+                                                    <tr class="bold center" style="font-size: 17px">
+                                                        <th>Name</th>
+                                                        <th>Desciption</th>
+                                                        <th>Price</th>
+                                                        <th>InStock</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                    </tfoot>
+                                                </table>
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="card mb-5">
-                                        <div class="card-body">
-                                            <div class="d-flex flex-column">
-                                                <div class="table-responsive">
+                            </div>
+                        </form>
 
-                                                    <table id="zero_configuration_table"
-                                                           class="display table table-striped table-bordered"
-                                                           style="width:100%">
-                                                        <thead>
-                                                        <tr class="bold center" style="font-size: 17px">
-                                                            <th>Name</th>
-                                                            <th>Desciption</th>
-                                                            <th>Price</th>
-                                                            <th>InStock</th>
-                                                            <th>Action</th>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                        <th:block th:each="p : ${product}">
-                                                            <tr>
-                                                                <td th:text="${p.name}">
-                                                                    <a th:href="@{}"></a>
-                                                                </td>
-                                                                <td th:text="${p.description}"></td>
-                                                                <td th:text="${p.price}"></td>
-                                                                <td th:text="${p.inStock}"></td>
-                                                                <!--                                                            <td style="width: 150px" >-->
-                                                                <!--                                                                <input type="checkbox" class="checkbox checkbox-outline-info" th:value="${p.id}">-->
-                                                                <!--                                                            </td>-->
-                                                            </tr>
-                                                        </th:block>
-                                                        </tbody>
-                                                        <tfoot>
-                                                        <tr class="bold center" style="font-size: 17px">
-                                                            <th>Name</th>
-                                                            <th>Desciption</th>
-                                                            <th>Price</th>
-                                                            <th>InStock</th>
-                                                            <th>Action</th>
-                                                        </tr>
-                                                        </tfoot>
-                                                    </table>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
                     </div>
                 </div>
             </div>
+        </div>
             <!-- end of col -->
 
         </div>

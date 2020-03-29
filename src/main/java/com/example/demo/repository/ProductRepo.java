@@ -18,11 +18,12 @@ public interface ProductRepo extends JpaRepository<Product,Integer> {
     Page<Product> findByName(String name,Pageable pageable);
 
     Product findById(int id);
-
+    public  Page<Product> findAllByName(String Name);
+    public Page<Product> findAllByNameContaining(String name,Pageable pageable);
     public void deleteById(int id);
 
-    @Query(value = "select u from User u")
-    Page<Product> findAll(Pageable pageable);
+//    @Query(value = "select u from User u")
+//    Page<Product> findAll(Pageable pageable);
 
     @Query(value = "SELECT * FROM test  .products limit 0,5;",nativeQuery = true)
     public List<Product> findFirst5ByID();
