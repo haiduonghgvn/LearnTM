@@ -46,10 +46,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")//
                 .defaultSuccessUrl("/user")//
                 .failureUrl("/login?message=error")//
-                .usernameParameter("username")//
+                .usernameParameter("username")//-
                 .passwordParameter("password")
                 // Cấu hình cho Logout Page.
-                .and().logout().logoutUrl("/j_spring_security_logout").logoutSuccessUrl("/login?message=logout").deleteCookies().invalidateHttpSession(true);
+                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/login?message=logout").deleteCookies().invalidateHttpSession(true);
     }
 
     @Override

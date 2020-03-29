@@ -30,8 +30,9 @@ public class BaseController {
     ProductServiceImpl productService;
     @Autowired
     UserServiceImpl userService;
-@Autowired
+    @Autowired
     PasswordEncoder passwordEncoder;
+
     @RequestMapping(value = {"/", "/login"})
     public String login() {
         return "login";
@@ -64,15 +65,18 @@ public class BaseController {
 
         return "/login";
     }
+
     //   ============> Bildding Basic Data  <================
     private void addListCateTomodel(Model model) {
         List<CategoryDto> list = categoryService.listAll();
         model.addAttribute("listCategory", list);
     }
+
     private void addListProductTomodel(Model model) {
         List<ProductDto> list = productService.listAll();
         model.addAttribute("listProduct", list);
     }
+
     private void addListUserTomodel(Model model) {
         List<UserDto> list = userService.listAll();
         model.addAttribute("listUser", list);
